@@ -11,8 +11,8 @@ Examples available at the moment:
 It is Raft-cluster storage for counters available over HTTP. The path in request acts as key for counter value:
 - to get current counter value you will need to do GET-request
 - to increment counter value  you will need to do POST request
-- if you need to increment counter and get the latest current value as reply to your POST - you will need to add yo our request query string special parameter `return_value=true`
-- to delete  counter you will need to do DELETE request
+- if you need to increment counter and get the latest current value as reply to your POST - you will need to add to your request query string special parameter `return_value=true`
+- to delete counter you will need to do DELETE request
 
 ### Building
 
@@ -76,3 +76,5 @@ curl -X DELETE http://localhost:3001/abc
 curl -X GET http://localhost:3001/abc
 0
 ```
+
+NOTE: tou can send HTTP all requests to any of `localhost:3001`, `localhost:3002` or `localhost:3003`, writes will be forwarded to current Raft-leader. So it is save to put all nodes behind load balancer and distribute your HTTP traffic.
