@@ -91,8 +91,8 @@ func (s *InMemCounter) SaveSnapshot(w io.Writer, fc statemachine.ISnapshotFileCo
 
 // RecoverFromSnapshot recovers the state using the provided snapshot
 func (s *InMemCounter) RecoverFromSnapshot(r io.Reader, files []statemachine.SnapshotFile, done <-chan struct{}) error {
-	s.mutex.RLock()
-	defer s.mutex.RUnlock()
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
 
 	dec := gob.NewDecoder(r)
 	if err := dec.Decode(&s.data); err != nil {
